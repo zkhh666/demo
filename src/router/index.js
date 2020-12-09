@@ -21,6 +21,17 @@ const routes = [
   // }
 ]
 
+// 路由守卫   验证token存在否
+router.beforeEach((to, from, next) => {
+  // if (Vue.ls.get(ACCESS_TOKEN)) {
+  //   next()
+  // }
+  next()
+})
+router.afterEach((to, from, next) => {
+  next()
+})
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
