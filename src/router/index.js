@@ -1,41 +1,54 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home'
+import Error from '../views/error'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     name: 'Home',
     component: Home
+  }, {
+    path: '*',
+    name: '404页面',
+    component: Error
   },
   // 懒加载 
   // {
   //   path: '/about',
   //   name: 'About',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  // route level code-splitting
+  // this generates a separate chunk (about.[hash].js) for this route
+  // which is lazy-loaded when the route is visited.
+  // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
 ]
 
-// 路由守卫   验证token存在否
-router.beforeEach((to, from, next) => {
-  // if (Vue.ls.get(ACCESS_TOKEN)) {
-  //   next()
-  // }
-  next()
-})
-router.afterEach((to, from, next) => {
-  next()
-})
+
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
+// 路由守卫   验证token存在否
+router.beforeEach((to, from, next) => {
+  next()
+  // let lastname = localStorage.getItem("token");
+  // if (lastname) {
+  //   next()
+  // } else {
+  //   if (to.path === '/user/login') {
+  //     next()
+  //   } else {
+  //     next({
+  //       path: '/user/login',
+  //     })
+  //   }
+
+  // }
+
+})
+
 
 export default router
